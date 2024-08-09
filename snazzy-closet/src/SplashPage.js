@@ -1,40 +1,49 @@
 import React from 'react';
-import { Container, Typography, Button } from '@mui/material';
-import { Google as GoogleIcon, Facebook as FacebookIcon } from '@mui/icons-material';
+import { Container, Typography, Button, TextField, Box } from '@mui/material';
+import { styled } from '@mui/system';
 
-function SplashPage() {
+const BackgroundBox = styled(Box)({
+  height: '100vh',
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'center',
+  alignItems: 'center',
+  backgroundImage: 'linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%)',
+  textAlign: 'center',
+});
+
+function LaunchSplashPage() {
   return (
-    <Container maxWidth="md" style={{ textAlign: 'center', marginTop: '10%' }}>
-      <Typography variant="h2" component="h1" gutterBottom>
-        Snazzy Closet
-      </Typography>
-      <Typography variant="h5" component="p" gutterBottom>
-        Your Personalized Fashion Recommender
-      </Typography>
-      <Typography variant="body1" component="p" style={{ marginTop: '20px', marginBottom: '40px' }}>
-        Get stylish recommendations for your outfits in a snap!
-      </Typography>
-      <div>
+    <BackgroundBox>
+      <Container maxWidth="sm">
+        <Typography variant="h2" component="h1" gutterBottom>
+          Snazzy Closet
+        </Typography>
+        <Typography variant="h5" component="p" gutterBottom>
+          Your Personalized Fashion Recommender
+        </Typography>
+        <Typography variant="body1" component="p" gutterBottom>
+          Get ready for a stylish experience tailored just for you. Sign up to be the first to know when we launch!
+        </Typography>
+        <TextField
+          variant="outlined"
+          placeholder="Enter your email"
+          fullWidth
+          margin="normal"
+          InputProps={{ style: { backgroundColor: 'white', borderRadius: '4px' } }}
+        />
         <Button
           variant="contained"
           color="primary"
-          startIcon={<GoogleIcon />}
-          style={{ marginRight: '10px' }}
-          onClick={() => alert('Google Sign-In')}
+          size="large"
+          fullWidth
+          style={{ marginTop: '20px', padding: '10px' }}
         >
-          Sign in with Google
+          Join the Waitlist
         </Button>
-        <Button
-          variant="contained"
-          color="primary"
-          startIcon={<FacebookIcon />}
-          onClick={() => alert('Facebook Sign-In')}
-        >
-          Sign in with Facebook
-        </Button>
-      </div>
-    </Container>
+      </Container>
+    </BackgroundBox>
   );
 }
 
-export default SplashPage;
+export default LaunchSplashPage;
