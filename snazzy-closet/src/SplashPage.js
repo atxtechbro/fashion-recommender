@@ -8,21 +8,34 @@ const BackgroundBox = styled(Box)({
   flexDirection: 'column',
   justifyContent: 'center',
   alignItems: 'center',
-  backgroundImage: 'linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%)',
+  backgroundImage: 'linear-gradient(120deg, #1D4E89 0%, #87CEEB 100%)', // Metallic Blue to Soft Sky Blue
   textAlign: 'center',
 });
+
+const CustomButton = styled(Button)({
+  backgroundColor: '#008080', // Bright Teal
+  color: '#FFFFFF', // White
+  '&:hover': {
+    backgroundColor: '#1D4E89', // Metallic Blue
+  },
+});
+
+const textStyles = {
+  color: '#FFFFFF', // White for high contrast
+  textShadow: '1px 1px 3px rgba(0, 0, 0, 0.5)', // Subtle shadow for better readability
+};
 
 function LaunchSplashPage() {
   return (
     <BackgroundBox>
       <Container maxWidth="sm">
-        <Typography variant="h2" component="h1" gutterBottom>
+        <Typography variant="h2" component="h1" gutterBottom style={{ ...textStyles, fontWeight: 'bold' }}>
           Snazzy Closet
         </Typography>
-        <Typography variant="h5" component="p" gutterBottom>
+        <Typography variant="h5" component="p" gutterBottom style={textStyles}>
           Your Personalized Fashion Recommender
         </Typography>
-        <Typography variant="body1" component="p" gutterBottom>
+        <Typography variant="body1" component="p" gutterBottom style={textStyles}>
           Get ready for a stylish experience tailored just for you. Sign up to be the first to know when we launch!
         </Typography>
         <TextField
@@ -30,17 +43,16 @@ function LaunchSplashPage() {
           placeholder="Enter your email"
           fullWidth
           margin="normal"
-          InputProps={{ style: { backgroundColor: 'white', borderRadius: '4px' } }}
+          InputProps={{ style: { backgroundColor: '#FFFFFF', borderRadius: '4px' } }}
         />
-        <Button
+        <CustomButton
           variant="contained"
-          color="primary"
           size="large"
           fullWidth
           style={{ marginTop: '20px', padding: '10px' }}
         >
           Join the Waitlist
-        </Button>
+        </CustomButton>
       </Container>
     </BackgroundBox>
   );
