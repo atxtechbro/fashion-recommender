@@ -55,18 +55,20 @@ function HeroSection() {
       </Typography>
 
       {/* Email capture input */}
-      <EmailTextField
-        variant="outlined"
-        placeholder="Enter your email"
-        fullWidth
-        margin="normal"
-        InputProps={{ style: { backgroundColor: '#FFFFFF', borderRadius: '4px' } }}
-      />
-
-      {/* Call to action button */}
-      <HeroButton variant="contained" size="large">
-        Join the Waitlist
-      </HeroButton>
+      <form name="email-capture" method="POST" data-netlify="true">
+        <input type="hidden" name="form-name" value="email-capture" />
+        <EmailTextField
+          variant="outlined"
+          placeholder="Enter your email"
+          fullWidth
+          margin="normal"
+          name="email"
+          InputProps={{ style: { backgroundColor: '#FFFFFF', borderRadius: '4px' } }}
+        />
+        <HeroButton type="submit" variant="contained" size="large">
+          Join the Waitlist
+        </HeroButton>
+      </form>
 
       {/* Placeholder for the Hero Image or Visual */}
       <HeroImage
