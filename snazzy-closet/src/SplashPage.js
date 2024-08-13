@@ -54,8 +54,8 @@ function HeroSection() {
         Elevate your look. Conquer your day. Snazzy Closet's got you covered.
       </Typography>
 
-      {/* Email capture input */}
-      <form name="email-capture" method="POST" data-netlify="true">
+      {/* Email capture input with redirect to /thank-you */}
+      <form name="email-capture" method="POST" data-netlify="true" action="/thank-you">
         <input type="hidden" name="form-name" value="email-capture" />
         <EmailTextField
           variant="outlined"
