@@ -45,13 +45,13 @@ function HeroSection() {
   return (
     <HeroBox>
       <Typography variant="h3" component="h1" gutterBottom>
-        Own the Room.
+        Automate Your Wardrobe.
       </Typography>
       <Typography variant="h5" component="p" gutterBottom>
-        AI-Driven Style, Unstoppable Confidence.
+        Fashion Intelligence at Your Fingertips.
       </Typography>
       <Typography variant="body1" component="p" gutterBottom>
-        Elevate your look. Conquer your day. Snazzy Closet's got you covered.
+        Algofit.io digitizes your wardrobe, analyzes over 20,000 data points, and recommends outfits based on your unique traits—like eye color, hair color, and skin tone. Welcome to the future of fashion.
       </Typography>
 
       {/* Email capture input with redirect to /thank-you */}
