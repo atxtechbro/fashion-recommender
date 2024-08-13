@@ -63,7 +63,9 @@ function HeroSection() {
           fullWidth
           margin="normal"
           name="email"
+          type="email"
           InputProps={{ style: { backgroundColor: '#FFFFFF', borderRadius: '4px' } }}
+          required
         />
         <HeroButton type="submit" variant="contained" size="large">
           Join the Waitlist
