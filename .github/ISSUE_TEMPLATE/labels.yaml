@@ -1,0 +1,35 @@
+- name: bug
+  color: ff3b3b  # A more vibrant red
+  description: Found a glitch in the matrix? Let’s squash it!
+
+- name: documentation
+  color: 0096ff  # A brighter blue
+  description: Let’s make our docs as smooth as our product.
+
+- name: duplicate
+  color: b0b0b0  # A sleeker gray
+  description: Déjà vu? This one’s already on the list.
+
+- name: enhancement
+  color: 00e4ff  # A punchier cyan
+  description: Got an idea to level up? Let’s make it happen!
+
+- name: good first issue
+  color: 8a2be2  # A more energetic violet
+  description: Dive in! A perfect task for a strong start.
+
+- name: help wanted
+  color: 00b87c  # A lively green
+  description: We’re calling for backup—lend a hand!
+
+- name: invalid
+  color: ffff33  # A bold yellow
+  description: Something’s off here—let’s take another look.
+
+- name: question
+  color: ff66cc  # A bright pink
+  description: Got a question? We’ve got answers!
+
+- name: wontfix
+  color: e0e0e0  # A soft white
+  description: Not in the cards for now, but we’ll keep it in mind.

@@ -1,0 +1,45 @@
+name: Manage Labels
+
+on:
+  push:
+    paths:
+      - '.github/labels.yml'
+
+jobs:
+  labeler:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Manage Labels
+      uses: actions/github-script@v4
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        script: |
+          const labels = require('./.github/labels.yml');
+          for (const label of labels) {
+            const existingLabel = await github.issues.getLabel({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              name: label.name
+            }).catch(() => null);
+
+            if (existingLabel) {
+              await github.issues.updateLabel({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                name: label.name,
+                color: label.color,
+                description: label.description,
+              });
+            } else {
+              await github.issues.createLabel({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                name: label.name,
+                color: label.color,
+                description: label.description,
+              });
+            }
+          }
