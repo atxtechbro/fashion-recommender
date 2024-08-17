@@ -6,7 +6,7 @@ permissions:
 on:
   push:
     paths:
-      - '.github/labels.yml'
+      - 'labels.yml'
   workflow_dispatch: # This allows manual triggering of the workflow
 
 jobs:
