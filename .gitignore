@@ -1,10 +1,10 @@
-# Ignore node_modules across the project
+# Node.js Dependencies
 snazzy-closet/node_modules
 
-# Ignore build output
+# Build Output
 snazzy-closet/build
 
-# Ignore environment variables
+# Environment Variables
 .env.local
 .env.development.local
 .env.test.local
@@ -12,6 +12,9 @@ snazzy-closet/build
 
 # Ignore reference_assets directory
 reference_assets/
+
+# Ignore Setup Scripts
+setup_backend.sh
 
 # Misc
 .DS_Store
