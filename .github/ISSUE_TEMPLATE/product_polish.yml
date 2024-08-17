@@ -1,0 +1,26 @@
+name: "Product Polish"
+description: "Suggest a tweak or improvement to polish our product."
+title: "[Improvement]: "
+labels: ["enhancement", "product"]
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Let’s add some shine! Tell us how we can take things up a notch.
+  - type: textarea
+    id: improvement-description
+    attributes:
+      label: What’s your idea?
+      description: Describe the improvement and how it will enhance the product.
+      placeholder: "Describe the improvement."
+    validations:
+      required: true
+  - type: textarea
+    id: impact
+    attributes:
+      label: Why does it matter?
+      description: Explain the impact this will have on users or the product.
+      placeholder: "Describe the impact."
+    validations:
+      required: true

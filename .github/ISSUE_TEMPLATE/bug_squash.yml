@@ -1,0 +1,61 @@
+name: "Bug Squashing"
+description: "Found a bug? Let’s squash it!"
+title: "[Bug]: "
+labels: ["bug", "triage"]
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for helping us find and squash bugs! Please give us the details so we can fix it fast.
+  - type: input
+    id: contact
+    attributes:
+      label: How can we reach you?
+      description: Just in case we need to follow up!
+      placeholder: "example@example.com"
+    validations:
+      required: false
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What went wrong?
+      description: Tell us what broke, and what you were hoping would happen instead.
+      placeholder: "Describe the bug in all its frustrating glory."
+    validations:
+      required: true
+  - type: dropdown
+    id: version
+    attributes:
+      label: What version are you on?
+      description: Tell us the version you’re using so we can track it down.
+      options:
+        - 1.0.2 (Default)
+        - 1.0.3 (Edge)
+      default: 0
+    validations:
+      required: true
+  - type: dropdown
+    id: browsers
+    attributes:
+      label: Browser(s) you’re using
+      multiple: true
+      options:
+        - Firefox
+        - Chrome
+        - Safari
+        - Microsoft Edge
+  - type: textarea
+    id: logs
+    attributes:
+      label: Any logs or details?
+      description: Paste in any error messages or logs that could help us out.
+      render: shell
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Terms of Engagement
+      description: We’ll follow our internal Code of Conduct when fixing this. By reporting, you’re cool with that.
+      options:
+        - label: "Yep, I’m cool with that"
+          required: true

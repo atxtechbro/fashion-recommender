@@ -1,0 +1,26 @@
+name: "Docs Delight"
+description: "Help us make our docs as awesome as our product."
+title: "[Docs]: "
+labels: ["documentation"]
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Documentation is key to a great user experience. If you see something we can improve, let us know!
+  - type: input
+    id: contact
+    attributes:
+      label: How can we reach you?
+      description: Just in case we need more context!
+      placeholder: "example@example.com"
+    validations:
+      required: false
+  - type: textarea
+    id: docs-suggestion
+    attributes:
+      label: What needs improving?
+      description: Tell us what’s missing or unclear, and how we can make it better.
+      placeholder: "Describe the documentation improvement."
+    validations:
+      required: true

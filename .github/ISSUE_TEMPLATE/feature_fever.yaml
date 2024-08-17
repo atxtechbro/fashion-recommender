@@ -1,0 +1,34 @@
+name: "Feature Fever"
+description: "Got an awesome feature idea? We want to hear it!"
+title: "[Feature]: "
+labels: ["enhancement", "feature"]
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        We’re all about making cool stuff even cooler. Got an idea for a feature? Let’s hear it!
+  - type: input
+    id: contact
+    attributes:
+      label: How can we reach you?
+      description: If we need more details or just want to high-five you for the idea.
+      placeholder: "example@example.com"
+    validations:
+      required: false
+  - type: textarea
+    id: feature-description
+    attributes:
+      label: What’s your idea?
+      description: Lay it on us—what’s the feature, and how will it make the app even better?
+      placeholder: "Describe the feature you’ve been dreaming of."
+    validations:
+      required: true
+  - type: textarea
+    id: use-case
+    attributes:
+      label: How will it be used?
+      description: How will this feature make users’ lives better? Who’s it for?
+      placeholder: "Give us the inside scoop."
+    validations:
+      required: true

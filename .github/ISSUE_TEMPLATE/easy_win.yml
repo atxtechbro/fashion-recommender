@@ -1,0 +1,26 @@
+name: "Easy Win"
+description: "Get started with a task that’s easy but impactful."
+title: "[First Issue]: "
+labels: ["good first issue", "help wanted"]
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Ready to dive in? Here’s a task that’s a quick win but still makes a big difference.
+  - type: textarea
+    id: task-details
+    attributes:
+      label: What needs doing?
+      description: Summarize the task at hand.
+      placeholder: "Describe the task."
+    validations:
+      required: true
+  - type: textarea
+    id: additional-info
+    attributes:
+      label: Anything else?
+      description: Any other tips or context that might help.
+      placeholder: "Additional info here."
+    validations:
+      required: false
