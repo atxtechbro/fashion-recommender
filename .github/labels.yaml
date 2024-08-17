@@ -12,7 +12,7 @@
 
 - name: enhancement
   color: 00e4ff  # A punchier cyan
-  description: Got an idea to level up? Let’s make it happen!!
+  description: Got an idea to level up? Let’s make it happen!
 
 - name: good first issue
   color: 8a2be2  # A more energetic violet
