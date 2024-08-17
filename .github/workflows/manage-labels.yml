@@ -16,12 +16,21 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2
 
+    - name: Install Dependencies
+      run: npm install js-yaml
+
     - name: Manage Labels
       uses: actions/github-script@v4
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
         script: |
-          const labels = require(process.env.GITHUB_WORKSPACE + '/.github/labels.yaml');
+          const fs = require('fs');
+          const yaml = require('js-yaml');
+          const filePath = process.env.GITHUB_WORKSPACE + '/.github/labels.yaml';
+          
+          const fileContents = fs.readFileSync(filePath, 'utf8');
+          const labels = yaml.load(fileContents);
+
           for (const label of labels) {
             const existingLabel = await github.issues.getLabel({
               owner: context.repo.owner,
