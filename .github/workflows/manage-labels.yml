@@ -6,7 +6,7 @@ permissions:
 on:
   push:
     paths:
-      - 'labels.yml'
+      - '.github/labels.yaml'
   workflow_dispatch: # This allows manual triggering of the workflow
 
 jobs:
@@ -21,7 +21,7 @@ jobs:
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
         script: |
-          const labels = require(process.env.GITHUB_WORKSPACE + '/labels.yml');
+          const labels = require(process.env.GITHUB_WORKSPACE + '/.github/labels.yaml');
           for (const label of labels) {
             const existingLabel = await github.issues.getLabel({
               owner: context.repo.owner,
