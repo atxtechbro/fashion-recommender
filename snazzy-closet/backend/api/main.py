@@ -1,9 +1,12 @@
 from fastapi import FastAPI
-from .routes import router
+from backend.api.user_routes import router as user_router
+from backend.api.clothing_item_routes import router as clothing_item_router
 
 app = FastAPI()
 
-app.include_router(router)
+app.include_router(user_router, prefix="/api/v1")
+app.include_router(clothing_item_router, prefix="/api/v1")
+
 
 if __name__ == "__main__":
     import uvicorn

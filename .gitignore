@@ -21,3 +21,7 @@ setup_backend.sh
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# Python cache files
+*.pyc
+__pycache__/
