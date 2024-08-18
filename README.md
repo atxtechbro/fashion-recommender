@@ -23,6 +23,27 @@ Snazzy Closet aims to provide a seamless and personalized fashion recommendation
 
 ## Project Structure
 
+Here's how you can structure the markdown for the `## Project Structure` section, including the `## Backend` subsection, with the correct placement of backticks and placeholder text:
+
+```markdown
+## Project Overview
+
+Snazzy Closet aims to provide a seamless and personalized fashion recommendation experience. Users can upload information about their wardrobe, and the system will suggest outfits based on their preferences, previous selections, and other criteria.
+
+## Project Structure
+```
+.
+├── snazzy-closet
+│   ├── backend
+│   │   └── secret_lab/ (where the fashion magic happens)
+│   ├── frontend
+│   │   └── glam_zone/ (where we sprinkle the style dust)
+│   └── scripts
+│       └── wizardry.sh (abracadabra, wardrobe updates)
+```
+
+This playful sentence adds a bit of humor while still fitting within the technical context of your project structure.
+
 ## Backend
 
 The backend is responsible for handling API requests, interacting with the database, and running machine learning models.
