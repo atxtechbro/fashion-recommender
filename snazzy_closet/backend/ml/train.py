@@ -4,9 +4,7 @@ import json
 import tensorflow as tf
 from data_loading import load_and_preprocess_fashion_mnist
 from model import build_model
-
-# Set a smaller batch size
-BATCH_SIZE = 16  # You can try lowering this even further if needed
+from config import BATCH_SIZE, LEARNING_RATE, EPOCHS, TRAINING_LOG_DIR, MODEL_INPUT_SHAPE, NUM_CLASSES
 
 # Load and preprocess the Fashion-MNIST data
 train_dataset, test_dataset = load_and_preprocess_fashion_mnist()
@@ -16,10 +14,10 @@ train_dataset = tf.data.Dataset.from_tensor_slices(train_dataset).batch(BATCH_SI
 test_dataset = tf.data.Dataset.from_tensor_slices(test_dataset).batch(BATCH_SIZE)
 
 # Build the model
-model = build_model(input_shape=(224, 224, 3), num_classes=10)
+model = build_model(input_shape=MODEL_INPUT_SHAPE, num_classes=NUM_CLASSES)
 
 # Compile the model
-model.compile(optimizer=tf.keras.optimizers.Adam(learning_rate=0.0001),
+model.compile(optimizer=tf.keras.optimizers.Adam(learning_rate=LEARNING_RATE),
               loss='sparse_categorical_crossentropy',
               metrics=['accuracy'])
 
@@ -27,19 +25,18 @@ model.compile(optimizer=tf.keras.optimizers.Adam(learning_rate=0.0001),
 history = model.fit(
     train_dataset,
     validation_data=test_dataset,
-    epochs=10
+    epochs=EPOCHS
 )
 
 # Save the model and training history
 timestamp = datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
-log_dir = 'snazzy_closet/backend/ml/training_logs'
-os.makedirs(log_dir, exist_ok=True)
+os.makedirs(TRAINING_LOG_DIR, exist_ok=True)
 
-model.save(os.path.join(log_dir, f'fine_tuned_wardrobe_model_{timestamp}.h5'))
+model.save(os.path.join(TRAINING_LOG_DIR, f'fine_tuned_wardrobe_model_{timestamp}.h5'))
 
-history_path = os.path.join(log_dir, f'training_history_{timestamp}.json')
+history_path = os.path.join(TRAINING_LOG_DIR, f'training_history_{timestamp}.json')
 with open(history_path, 'w') as f:
     json.dump(history.history, f)
 
-print(f"Model saved as fine_tuned_wardrobe_model_{timestamp}.h5 in {log_dir}")
+print(f"Model saved as fine_tuned_wardrobe_model_{timestamp}.h5 in {TRAINING_LOG_DIR}")
 print(f"Training history saved as {history_path}")

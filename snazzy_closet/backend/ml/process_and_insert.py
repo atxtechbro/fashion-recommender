@@ -11,11 +11,15 @@ from matplotlib.colors import rgb_to_hsv
 
 from model import load_model
 from image_processing import preprocess_image
+from config import MONGODB_URI, DATABASE_NAME, COLLECTION_NAME, PHOTOS_DIR
 
 # MongoDB setup
-client = MongoClient('mongodb://localhost:27017/')
-db = client['fashion_recommender_db']
-collection = db['clothing_items']
+client = MongoClient(MONGODB_URI)
+db = client[DATABASE_NAME]
+collection = db[COLLECTION_NAME]
+
+# Load the classification model
+model = load_model()
 
 # Load the classification model
 model = load_model()
@@ -114,7 +118,6 @@ def convert_rgb_to_color_name(rgb_color):
     # Fallback for any unclassified colors
     return "unknown"
 
-
 # Process images and insert into the database
 def process_and_insert_images(photos_dir, model, collection):
     for image_name in os.listdir(photos_dir):
@@ -150,9 +153,5 @@ def process_and_insert_images(photos_dir, model, collection):
 
     print("All images have been processed and inserted into the database.")
 
-
 if __name__ == "__main__":
-    photos_dir = 'reference_assets/test_images/'
-    
-    # Process images and insert them into the database
-    process_and_insert_images(photos_dir, model, collection)
+    process_and_insert_images(PHOTOS_DIR, model, collection)
