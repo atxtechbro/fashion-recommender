@@ -11,19 +11,29 @@ from model import load_model
 from image_processing import preprocess_image
 from config import PHOTOS_DIR
 from database_utils import get_mongo_client, get_collection, insert_item
+from logging_config import get_logger
+
+# Initialize logger
+logger = get_logger(__name__)
 
 # Load the classification model
+logger.info("Loading the classification model.")
 model = load_model()
 
 def classify_item(image_path, model):
+    logger.info(f"Classifying item from image: {image_path}")
     image_array = preprocess_image(image_path)
     predictions = model.predict(image_array[np.newaxis, ...])  # Add batch dimension
     
     wardrobe_categories = ['shirt', 'pants', 'hat', 'shoes', 'belt', 'socks']
     predicted_index = np.argmax(predictions, axis=1)[0]
-    return wardrobe_categories[predicted_index] if predicted_index < len(wardrobe_categories) else "unknown"
+    predicted_category = wardrobe_categories[predicted_index] if predicted_index < len(wardrobe_categories) else "unknown"
+    
+    logger.info(f"Image classified as: {predicted_category}")
+    return predicted_category
 
 def detect_color(image_path):
+    logger.info(f"Detecting dominant color in image: {image_path}")
     image = cv2.imread(image_path)
     image_resized = cv2.resize(image, (224, 224))
     image_rgb = cv2.cvtColor(image_resized, cv2.COLOR_BGR2RGB)
@@ -32,7 +42,9 @@ def detect_color(image_path):
     kmeans = KMeans(n_clusters=3)
     kmeans.fit(pixels)
     
-    return convert_rgb_to_color_name(kmeans.cluster_centers_[0])
+    color_name = convert_rgb_to_color_name(kmeans.cluster_centers_[0])
+    logger.info(f"Dominant color detected: {color_name}")
+    return color_name
 
 def convert_rgb_to_color_name(rgb_color):
     hsv_color = rgb_to_hsv(rgb_color / 255.0)
@@ -81,10 +93,12 @@ def convert_rgb_to_color_name(rgb_color):
     return "unknown"
 
 def process_and_insert_images(photos_dir, model, collection):
+    logger.info(f"Processing images in directory: {photos_dir}")
     for image_name in os.listdir(photos_dir):
         image_path = os.path.join(photos_dir, image_name)
         
         if not image_name.lower().endswith(('.png', '.jpg', '.jpeg', '.gif', '.bmp')):
+            logger.warning(f"Skipping unsupported file format: {image_name}")
             continue
         
         item_category = classify_item(image_path, model)
@@ -105,8 +119,9 @@ def process_and_insert_images(photos_dir, model, collection):
         }
         
         insert_item(collection, item_data)
+        logger.info(f"Processed and inserted item: {item_data['item_name']}")
 
-    print("All images have been processed and inserted into the database.")
+    logger.info("All images have been processed and inserted into the database.")
 
 if __name__ == "__main__":
     client = get_mongo_client()
