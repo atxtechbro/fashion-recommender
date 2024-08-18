@@ -24,13 +24,12 @@ jobs:
       - name: Generate Project Structure
         run: python scripts/update_readme.py > project_structure.txt
 
-      - name: Check project structure output
-        run: cat project_structure.txt
-      
       - name: Update README
         run: |
-          # Find and replace the Project Structure section based on the header index
-          sed -i '/## Project Structure/,/```/c\## Project Structure\n\n```markdown\n$(cat project_structure.txt)\n```' README.md
+          # Store the project structure in a variable
+          structure=$(cat project_structure.txt)
+          # Replace the Project Structure section with the actual content
+          sed -i "/## Project Structure/,/```/c\## Project Structure\n\n\`\`\`markdown\n${structure}\n\`\`\`" README.md
 
       - name: Check for changes
         run: |
