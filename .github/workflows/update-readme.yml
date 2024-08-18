@@ -27,15 +27,12 @@ jobs:
 
       - name: Update README
         run: |
-          # Define the start and end markers for the project structure section
           start_marker="## Project Structure"
           end_marker="## Backend"
 
-          # Extract the existing README content before and after the Project Structure section
           before_structure=$(sed -n "1,/$start_marker/p" README.md | sed '$d')
           after_structure=$(sed -n "/$end_marker/,\$p" README.md)
 
-          # Concatenate the content with the updated project structure
           {
             echo "$before_structure"
             echo "$start_marker"
@@ -45,7 +42,6 @@ jobs:
             echo "$after_structure"
           } > updated_readme.md
 
-          # Replace README.md only if changes are detected
           if ! diff -q README.md updated_readme.md > /dev/null; then
             mv updated_readme.md README.md
             echo "Changes detected."
@@ -57,7 +53,7 @@ jobs:
           fi
 
       - name: Commit changes
-        if: env.changes == 'true' # Only run if changes are detected
+        if: env.changes == 'true'
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email '41898282+github-actions[bot]@users.noreply.github.com'
@@ -66,9 +62,3 @@ jobs:
           git push
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Cleanup
-        if: env.changes == 'true'
-        run: |
-          # Clean up the backup file if changes were made
-          rm README.md.bak
