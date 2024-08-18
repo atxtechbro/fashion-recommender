@@ -23,29 +23,9 @@ Snazzy Closet aims to provide a seamless and personalized fashion recommendation
 
 ## Project Structure
 
-```markdown
-$(cat project_structure.txt)
 ```
-## Project Overview
-
-Snazzy Closet aims to provide a seamless and personalized fashion recommendation experience. Users can upload information about their wardrobe, and the system will suggest outfits based on their preferences, previous selections, and other criteria.
-
-## Project Structure
-
-```markdown
-$(cat project_structure.txt)
+<!-- AUTOMATED GHA OUTPUT FOR TREE SHOULD GO HERE AND REPLACE THIS PART AND LOOK PRETTY -->
 ```
-.
-├── snazzy-closet
-│   ├── backend
-│   │   └── secret_lab/ (where the fashion magic happens)
-│   ├── frontend
-│   │   └── glam_zone/ (where we sprinkle the style dust)
-│   └── scripts
-│       └── wizardry.sh (abracadabra, wardrobe updates)
-```
-
-This playful sentence adds a bit of humor while still fitting within the technical context of your project structure.
 
 ## Backend
 
