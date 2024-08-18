@@ -2,7 +2,7 @@ import datetime
 import os
 import json
 import tensorflow as tf
-from preprocess import load_and_preprocess_fashion_mnist
+from data_loading import load_and_preprocess_fashion_mnist
 from model import build_model
 
 # Set a smaller batch size

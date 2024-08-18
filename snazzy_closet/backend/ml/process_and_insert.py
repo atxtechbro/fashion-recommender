@@ -10,7 +10,7 @@ import cv2
 from matplotlib.colors import rgb_to_hsv
 
 from model import load_model
-from preprocess import preprocess_image, save_preprocessed_image
+from image_processing import preprocess_image
 
 # MongoDB setup
 client = MongoClient('mongodb://localhost:27017/')
@@ -147,11 +147,6 @@ def process_and_insert_images(photos_dir, model, collection):
         # Insert into the database
         collection.insert_one(item_data)
         print(f"Processed and inserted: {item_data['item_name']}")
-        
-        # Save preprocessed image
-        preprocessed_image = preprocess_image(image_path)
-        preprocessed_image_path = os.path.join('output', os.path.basename(image_path))
-        save_preprocessed_image(preprocessed_image, preprocessed_image_path)
 
     print("All images have been processed and inserted into the database.")
 

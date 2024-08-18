@@ -1,4 +1,7 @@
-import tensorflow as tf
+from tensorflow import tf
+
+from image_processing import preprocess_batch
+
 
 def load_and_preprocess_fashion_mnist():
     (X_train, y_train), (X_test, y_test) = tf.keras.datasets.fashion_mnist.load_data()
@@ -10,5 +13,5 @@ def load_and_preprocess_fashion_mnist():
     # Apply preprocessing to each batch
     X_train = preprocess_batch(X_train)
     X_test = preprocess_batch(X_test)
-    
+
     return (X_train, y_train), (X_test, y_test)
