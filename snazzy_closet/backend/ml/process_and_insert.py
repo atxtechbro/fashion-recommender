@@ -45,24 +45,67 @@ def detect_color(image_path):
     
     return color_name
 
-# Convert RGB to a human-readable color name
 def convert_rgb_to_color_name(rgb_color):
-    hsv_color = rgb_to_hsv(rgb_color / 255)
-    
-    if hsv_color[0] < 15 or hsv_color[0] > 345:
+    hsv_color = rgb_to_hsv(rgb_color / 255.0)
+    hue, saturation, value = hsv_color[0] * 360, hsv_color[1], hsv_color[2]
+
+    if value < 0.2:  # Consider very dark colors as black
+        return "black"
+    elif value > 0.8 and saturation < 0.2:  # Consider very light colors as white
+        return "white"
+    elif saturation < 0.25:  # Consider low saturation as grayscale (gray)
+        if value < 0.5:
+            return "dark gray"
+        else:
+            return "light gray"
+
+    # Red shades
+    if (hue >= 0 and hue < 10) or (hue > 350 and hue <= 360):
         return "red"
-    elif hsv_color[0] < 45:
+    elif hue >= 10 and hue < 25:
+        return "orange red"
+    elif hue >= 25 and hue < 40:
         return "orange"
-    elif hsv_color[0] < 75:
+
+    # Yellow shades
+    elif hue >= 40 and hue < 60:
+        return "yellow orange"
+    elif hue >= 60 and hue < 75:
         return "yellow"
-    elif hsv_color[0] < 165:
+    elif hue >= 75 and hue < 85:
+        return "lime"
+
+    # Green shades
+    elif hue >= 85 and hue < 115:
         return "green"
-    elif hsv_color[0] < 225:
+    elif hue >= 115 and hue < 150:
+        return "turquoise green"
+
+    # Cyan/Aqua shades
+    elif hue >= 150 and hue < 180:
+        return "cyan"
+    elif hue >= 180 and hue < 210:
+        return "aqua"
+
+    # Blue shades
+    elif hue >= 210 and hue < 240:
         return "blue"
-    elif hsv_color[0] < 345:
+    elif hue >= 240 and hue < 270:
+        return "indigo"
+
+    # Purple shades
+    elif hue >= 270 and hue < 290:
+        return "violet"
+    elif hue >= 290 and hue < 320:
         return "purple"
-    else:
-        return "unknown"
+    elif hue >= 320 and hue < 335:
+        return "magenta"
+    elif hue >= 335 and hue < 350:
+        return "rose"
+
+    # Fallback for any unclassified colors
+    return "unknown"
+
 
 # Process images and insert into the database
 def process_and_insert_images(photos_dir, model, collection):
