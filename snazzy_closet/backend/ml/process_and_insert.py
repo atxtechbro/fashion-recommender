@@ -16,9 +16,10 @@ from preprocess import preprocess_image, save_preprocessed_image
 client = MongoClient('mongodb://localhost:27017/')
 db = client['fashion_recommender_db']
 collection = db['clothing_items']
+model_path = ""
 
 # Load the classification model
-model = load_model()
+model = load_model(model_path)
 
 def classify_item(image_path, model):
     image_array = preprocess_image(image_path)

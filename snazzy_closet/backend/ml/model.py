@@ -8,3 +8,6 @@ def build_model(input_shape=(224, 224, 3), num_classes=10):
         tf.keras.layers.Dense(num_classes, activation='softmax')  # Adjust number of classes as needed
     ])
     return model
+
+def load_model(model_path):
+    return tf.keras.models.load_model(model_path)
