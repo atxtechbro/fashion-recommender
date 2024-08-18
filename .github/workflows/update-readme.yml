@@ -29,9 +29,8 @@ jobs:
       
       - name: Update README
         run: |
-          # Replace the project structure section in README.md
-          sed -i '/## Project Structure/,/```/d' README.md
-          sed -i "/## Project Structure/r project_structure.txt" README.md
+          # Find and replace the Project Structure section based on the header index
+          sed -i '/## Project Structure/,/```/c\## Project Structure\n\n```markdown\n$(cat project_structure.txt)\n```' README.md
 
       - name: Check for changes
         run: |
