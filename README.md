@@ -1,74 +1,25 @@
 # Snazzy Closet
 
-Snazzy Closet is a fashion recommender app that helps users manage their wardrobe and receive personalized outfit recommendations. The project leverages FastAPI for the backend, MongoDB for data storage, and React for the frontend. It also includes machine learning components for analyzing user data to improve recommendations
+Snazzy Closet is a fashion recommender app that helps users manage their wardrobe and receive personalized outfit recommendations. The project leverages FastAPI for the backend, MongoDB for data storage, React for the frontend, and machine learning for analyzing user data to improve recommendations.
 
 ## Table of Contents
 
 - [Project Overview](#project-overview)
-- [Project Structure](#project-structure)
+- [Getting Started](#getting-started)
+  - [Prerequisites](#prerequisites)
+  - [Installation](#installation)
 - [Backend](#backend)
   - [API](#api)
   - [Database](#database)
   - [Machine Learning](#machine-learning)
-  - [Utilities](#utilities)
 - [Frontend](#frontend)
 - [Testing](#testing)
-- [Getting Started](#getting-started)
 - [Collaboration](#collaboration)
 - [License](#license)
 
 ## Project Overview
 
-Snazzy Closet aims to provide a seamless and personalized fashion recommendation experience. Users can upload information about their wardrobe, and the system will suggest outfits based on their preferences, previous selections, and other criteria.
-
-## Backend
-
-The backend is responsible for handling API requests, interacting with the database, and running machine learning models.
-
-### API
-
-- **`main.py`**: The entry point for the FastAPI application.
-- **`user_routes.py`**: Manages user-related API endpoints (create, read, update, delete).
-- **`clothing_item_routes.py`**: Handles CRUD operations for clothing items.
-
-### Database
-
-- **`db_config.py`**: Configures the MongoDB connection.
-- **`models.py`**: Defines the data schemas for users and clothing items.
-
-### Machine Learning
-
-- **`model.py`**: Defines the structure of the machine learning model.
-- **`preprocess.py`**: Handles data preprocessing.
-- **`train.py`**: Manages the training process for the model.
-
-### Utilities
-
-- **`config.py`**: Stores configuration settings.
-- **`helpers.py`**: Provides utility functions used throughout the backend.
-- **`logger.py`**: Configures the application’s logging.
-
-## Frontend
-
-The frontend is built using React and includes all the user interface components.
-
-- **`App.js`**: Main entry point for the React application.
-- **`index.js`**: Renders the React application to the DOM.
-- **`App.css`** and **`index.css`**: Styles for the application.
-- **`App.test.js`** and **`setupTests.js`**: Files for testing React components.
-
-## Testing
-
-We use `pytest` for backend testing, with tests located in the `tests` directory.
-
-- **`test_api.py`**: Contains unit tests for the API routes, covering user creation, retrieval, updating, and deletion.
-
-To run the tests:
-
-```bash
-export PYTHONPATH=$(pwd)
-pytest snazzy-closet/backend/tests
-```
+Snazzy Closet aims to provide a seamless and personalized fashion recommendation experience. Users can upload information about their wardrobe, and the system will suggest outfits based on their preferences, previous selections, and other criteria. The core of this functionality is powered by machine learning models that classify clothing items and detect colors, enhancing the personalization of recommendations.
 
 ## Getting Started
 
@@ -110,6 +61,54 @@ uvicorn backend.api.main:app --reload
 
 ```bash
 npm start
+```
+
+## Backend
+
+The backend is responsible for handling API requests, interacting with the database, and running machine learning models.
+
+### API
+
+- **`main.py`**: The entry point for the FastAPI application.
+- **`user_routes.py`**: Manages user-related API endpoints (create, read, update, delete).
+- **`clothing_item_routes.py`**: Handles CRUD operations for clothing items.
+
+### Database
+
+- **`db_config.py`**: Configures the MongoDB connection.
+- **`models.py`**: Defines the data schemas for users and clothing items.
+
+### Machine Learning
+
+The machine learning components are the heart of Snazzy Closet, providing intelligent recommendations based on image classification and color detection.
+
+- **`model.py`**: Defines the structure of the machine learning model.
+- **`preprocess.py`**: Handles data preprocessing, including image resizing, normalization, and feature extraction.
+- **`train.py`**: Manages the training process for the model, including loading and preprocessing images, training the model, and saving the trained model to disk.
+
+### Model Versioning and Storage
+
+When saving the trained model with `model.save('final_model.h5')`, ensure that a versioning strategy is in place to avoid overwriting models, especially in a CI/CD pipeline or production environment.
+
+## Frontend
+
+The frontend is built using React and includes all the user interface components.
+
+- **`App.js`**: Main entry point for the React application.
+- **`index.js`**: Renders the React application to the DOM.
+- **`App.css`** and **`index.css`**: Styles for the application.
+
+## Testing
+
+We use `pytest` for backend testing, with tests located in the `tests` directory.
+
+- **`test_api.py`**: Contains unit tests for the API routes, covering user creation, retrieval, updating, and deletion.
+
+To run the tests:
+
+```bash
+export PYTHONPATH=$(pwd)
+pytest snazzy-closet/backend/tests
 ```
 
 ## Collaboration
