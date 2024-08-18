@@ -26,10 +26,13 @@ jobs:
 
       - name: Update README
         run: |
-          # Store the project structure in a variable
-          structure=$(cat project_structure.txt)
-          # Replace the Project Structure section with the actual content
-          sed -i "/## Project Structure/,/```/c\## Project Structure\n\n\`\`\`markdown\n${structure}\n\`\`\`" README.md
+          # Replace the Project Structure section in README.md using a temporary file
+          sed -i '/## Project Structure/,/```/d' README.md
+          echo -e "## Project Structure\n\n\`\`\`markdown" > temp_readme.md
+          cat project_structure.txt >> temp_readme.md
+          echo -e "\`\`\`" >> temp_readme.md
+          sed -i '/## Project Structure/r temp_readme.md' README.md
+          rm temp_readme.md
 
       - name: Check for changes
         run: |
