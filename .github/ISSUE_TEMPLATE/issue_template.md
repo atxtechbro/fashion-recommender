@@ -1,7 +1,5 @@
 # Issue Template
 
-**Title:** [Issue Title Here]
-
 **Description:**
 Briefly describe the issue or task.
 
