@@ -1,5 +1,5 @@
 import datetime
-
+import json
 import tensorflow as tf
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
 
@@ -47,12 +47,21 @@ model.compile(optimizer=tf.keras.optimizers.Adam(learning_rate=0.0001),
               metrics=['accuracy'])
 
 # Step 5: Fine-Tune the Model
-model.fit(
+history = model.fit(
     train_generator,
     validation_data=validation_generator,
     epochs=10
 )
 
 timestamp = datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
+
 # Save the model with the timestamp in the filename
 model.save(f'fine_tuned_wardrobe_model_{timestamp}.h5')
+
+# Save the training history
+history_path = f'training_history_{timestamp}.json'
+with open(history_path, 'w') as f:
+    json.dump(history.history, f)
+
+print(f"Model saved as fine_tuned_wardrobe_model_{timestamp}.h5")
+print(f"Training history saved as {history_path}")
