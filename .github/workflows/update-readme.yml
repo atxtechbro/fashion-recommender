@@ -19,8 +19,7 @@ jobs:
           python-version: '3.x'
 
       - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
+        run: python -m pip install --upgrade pip
 
       - name: Generate Project Structure
         run: python scripts/update_readme.py > project_structure.txt
@@ -30,15 +29,21 @@ jobs:
           start_marker="## Project Structure"
           end_marker="## Backend"
 
+          # Extract the existing README content before and after the Project Structure section
           before_structure=$(sed -n "1,/$start_marker/p" README.md | sed '$d')
           after_structure=$(sed -n "/$end_marker/,\$p" README.md)
 
+          # Ensure proper formatting of the structure content
+          structure=$(cat project_structure.txt | sed 's/^/    /')
+
+          # Combine everything into the updated README
           {
             echo "$before_structure"
             echo "$start_marker"
-            echo '```'
-            cat project_structure.txt
-            echo '```'
+            echo ""
+            echo "\`\`\`"
+            echo "$structure"
+            echo "\`\`\`"
             echo "$after_structure"
           } > updated_readme.md
 
