@@ -1,6 +1,7 @@
 from fastapi import FastAPI
-from backend.api.user_routes import router as user_router
-from backend.api.clothing_item_routes import router as clothing_item_router
+
+from snazzy_closet.backend.api.user_routes import router as user_router
+from snazzy_closet.backend.api.clothing_item_routes import router as clothing_item_router
 
 app = FastAPI()
 
