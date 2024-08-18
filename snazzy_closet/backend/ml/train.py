@@ -1,3 +1,5 @@
+import datetime
+
 import tensorflow as tf
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
 
@@ -51,5 +53,6 @@ model.fit(
     epochs=10
 )
 
-# Step 6: Save the Fine-Tuned Model
-model.save('fine_tuned_wardrobe_model.h5')
+timestamp = datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
+# Save the model with the timestamp in the filename
+model.save(f'fine_tuned_wardrobe_model_{timestamp}.h5')
