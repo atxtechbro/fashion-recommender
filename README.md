@@ -23,14 +23,17 @@ Snazzy Closet aims to provide a seamless and personalized fashion recommendation
 
 ## Project Structure
 
-Here's how you can structure the markdown for the `## Project Structure` section, including the `## Backend` subsection, with the correct placement of backticks and placeholder text:
-
 ```markdown
+$(cat project_structure.txt)
+```
 ## Project Overview
 
 Snazzy Closet aims to provide a seamless and personalized fashion recommendation experience. Users can upload information about their wardrobe, and the system will suggest outfits based on their preferences, previous selections, and other criteria.
 
 ## Project Structure
+
+```markdown
+$(cat project_structure.txt)
 ```
 .
 ├── snazzy-closet
