@@ -1,8 +1,8 @@
 # Node.js Dependencies
-snazzy-closet/node_modules
+snazzy_closet/node_modules
 
 # Build Output
-snazzy-closet/build
+snazzy_closet/build
 
 # Environment Variables
 .env.local
@@ -28,6 +28,9 @@ __pycache__/
 
 # Virtual Environment
 venv/
+
+# Ignore Dataset directory
+snazzy_closet/backend/ml/dataset/
 
 # Ignore VS Code settings (optional)
 .vscode/
