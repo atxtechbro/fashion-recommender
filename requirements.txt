@@ -5,6 +5,7 @@ astunparse==1.6.3
 certifi==2024.7.4
 charset-normalizer==3.3.2
 click==8.1.7
+dnspython==2.6.1
 exceptiongroup==1.2.2
 fastapi==0.112.1
 flatbuffers==24.3.25
@@ -36,6 +37,7 @@ protobuf==4.25.4
 pydantic==2.8.2
 pydantic_core==2.20.1
 Pygments==2.18.0
+pymongo==4.8.0
 pytest==8.3.2
 python-dotenv==1.0.1
 PyYAML==6.0.2
