@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - main
-  workflow_dispatch: # Temporarily allow manual triggering for debugging
 
 jobs:
   update-readme:
