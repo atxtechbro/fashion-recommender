@@ -8,10 +8,11 @@ on:
 jobs:
   update-readme:
     runs-on: ubuntu-latest
+
     steps:
       - name: Check out the repository
         uses: actions/checkout@v3
-        
+
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
@@ -26,25 +27,33 @@ jobs:
 
       - name: Update README
         run: |
-          # Replace the Project Structure section in README.md using a temporary file
-          sed -i '/## Project Structure/,/```/d' README.md
-          echo -e "## Project Structure\n\n\`\`\`markdown" > temp_readme.md
-          cat project_structure.txt >> temp_readme.md
-          echo -e "\`\`\`" >> temp_readme.md
-          sed -i '/## Project Structure/r temp_readme.md' README.md
-          rm temp_readme.md
+          # Define the start and end markers for the project structure section
+          start_marker="## Project Structure"
+          end_marker="## Backend"
 
-      - name: Check for changes
-        run: |
-          # Check if there are differences between the new and original README.md
-          if git diff --quiet README.md; then
-            echo "No changes detected, exiting..."
-            echo "changes=false" >> $GITHUB_ENV
-          else
+          # Extract the existing README content before and after the Project Structure section
+          before_structure=$(sed -n "1,/$start_marker/p" README.md | sed '$d')
+          after_structure=$(sed -n "/$end_marker/,\$p" README.md)
+
+          # Concatenate the content with the updated project structure
+          {
+            echo "$before_structure"
+            echo "$start_marker"
+            echo '```'
+            cat project_structure.txt
+            echo '```'
+            echo "$after_structure"
+          } > updated_readme.md
+
+          # Replace README.md only if changes are detected
+          if ! diff -q README.md updated_readme.md > /dev/null; then
+            mv updated_readme.md README.md
             echo "Changes detected."
             echo "changes=true" >> $GITHUB_ENV
-            # Make a backup only if changes are detected
-            cp README.md README.md.bak
+          else
+            echo "No changes detected, skipping overwrite."
+            echo "changes=false" >> $GITHUB_ENV
+            rm updated_readme.md
           fi
 
       - name: Commit changes
