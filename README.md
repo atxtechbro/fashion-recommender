@@ -87,54 +87,6 @@ Snazzy Closet aims to provide a seamless and personalized fashion recommendation
 │   │   └── easy_win.yml
 └── project_structure.txt
 ```
-```
-.
-├── .gitignore
-├── README.md
-└── snazzy-closet
-    ├── backend
-    │   ├── api
-    │   │   ├── clothing_item_routes.py
-    │   │   ├── __init__.py
-    │   │   ├── main.py
-    │   │   └── user_routes.py
-    │   ├── db
-    │   │   ├── db_config.py
-    │   │   ├── __init__.py
-    │   │   └── models.py
-    │   ├── ml
-    │   │   ├── __init__.py
-    │   │   ├── model.py
-    │   │   ├── preprocess.py
-    │   │   └── train.py
-    │   ├── tests
-    │   │   └── test_api.py
-    │   └── utils
-    │       ├── config.py
-    │       ├── helpers.py
-    │       ├── __init__.py
-    │       └── logger.py
-    ├── package.json
-    ├── package-lock.json
-    ├── public
-    │   ├── favicon.ico
-    │   ├── index.html
-    │   ├── logo192.png
-    │   ├── logo512.png
-    │   ├── manifest.json
-    │   └── robots.txt
-    ├── README.md
-    └── src
-        ├── App.css
-        ├── App.js
-        ├── App.test.js
-        ├── index.css
-        ├── index.js
-        ├── logo.svg
-        ├── reportWebVitals.js
-        ├── setupTests.js
-        └── SplashPage.js
-```
 
 ## Backend
 
