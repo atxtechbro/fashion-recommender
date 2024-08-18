@@ -8,7 +8,6 @@ on:
 jobs:
   update-readme:
     runs-on: ubuntu-latest
-
     steps:
       - name: Check out the repository
         uses: actions/checkout@v3
@@ -19,13 +18,15 @@ jobs:
           python-version: '3.x'
 
       - name: Install dependencies
-        run: python -m pip install --upgrade pip
+        run: |
+          python -m pip install --upgrade pip
 
       - name: Generate Project Structure
         run: python scripts/update_readme.py > project_structure.txt
 
       - name: Update README
         run: |
+          # Define the start and end markers for the project structure section
           start_marker="## Project Structure"
           end_marker="## Backend"
 
@@ -33,20 +34,18 @@ jobs:
           before_structure=$(sed -n "1,/$start_marker/p" README.md | sed '$d')
           after_structure=$(sed -n "/$end_marker/,\$p" README.md)
 
-          # Ensure proper formatting of the structure content
-          structure=$(cat project_structure.txt | sed 's/^/    /')
-
-          # Combine everything into the updated README
+          # Concatenate the content with the updated project structure, ensuring proper formatting
           {
             echo "$before_structure"
             echo "$start_marker"
             echo ""
-            echo "\`\`\`"
-            echo "$structure"
-            echo "\`\`\`"
+            echo "```"
+            cat project_structure.txt
+            echo "```"
             echo "$after_structure"
           } > updated_readme.md
 
+          # Replace README.md only if changes are detected
           if ! diff -q README.md updated_readme.md > /dev/null; then
             mv updated_readme.md README.md
             echo "Changes detected."
