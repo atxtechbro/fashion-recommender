@@ -1,74 +1,55 @@
-import os
-import argparse
-
-import numpy as np
 import tensorflow as tf
+from tensorflow.keras.preprocessing.image import ImageDataGenerator
 
-from snazzy_closet.backend.ml.preprocess import preprocess_image
-from snazzy_closet.backend.ml.model import build_model
+# Step 1: Prepare the Dataset
+train_datagen = ImageDataGenerator(
+    rescale=1./255,
+    rotation_range=20,
+    width_shift_range=0.2,
+    height_shift_range=0.2,
+    shear_range=0.2,
+    zoom_range=0.2,
+    horizontal_flip=True,
+    fill_mode='nearest'
+)
 
+validation_datagen = ImageDataGenerator(rescale=1./255)
 
-def load_and_preprocess_images(image_dir, batch_size=32):
-    images = []
-    labels = []
-    
-    # Assuming your directory structure is image_dir/class_name/image.jpg
-    class_names = os.listdir(image_dir)
-    class_indices = {class_name: i for i, class_name in enumerate(class_names)}
-    
-    # Iterate over each class directory
-    for class_name in class_names:
-        class_dir = os.path.join(image_dir, class_name)
-        if not os.path.isdir(class_dir):
-            continue
-        
-        # Iterate over each image file in the class directory
-        for image_name in os.listdir(class_dir):
-            image_path = os.path.join(class_dir, image_name)
-            
-            # Preprocess the image using your custom function
-            image = preprocess_image(image_path)
-            images.append(image)
-            
-            # Add the corresponding label
-            labels.append(class_indices[class_name])
-    
-    # Convert to numpy arrays and one-hot encode the labels
-    images = np.array(images)
-    labels = tf.keras.utils.to_categorical(labels, num_classes=len(class_names))
-    
-    return images, labels
+train_generator = train_datagen.flow_from_directory(
+    'dataset/train',
+    target_size=(224, 224),
+    batch_size=32,
+    class_mode='sparse'
+)
 
-def train_model(model, train_dir, val_dir, epochs=10, batch_size=32):
-    # Load and preprocess the training and validation data
-    x_train, y_train = load_and_preprocess_images(train_dir, batch_size)
-    x_val, y_val = load_and_preprocess_images(val_dir, batch_size)
-    
-    # Compile the model
-    model.compile(optimizer=tf.keras.optimizers.Adam(),
-                  loss='categorical_crossentropy',
-                  metrics=['accuracy'])
-    
-    # Train the model
-    history = model.fit(
-        x_train, y_train,
-        validation_data=(x_val, y_val),
-        epochs=epochs,
-        batch_size=batch_size
-    )
+validation_generator = validation_datagen.flow_from_directory(
+    'dataset/validation',
+    target_size=(224, 224),
+    batch_size=32,
+    class_mode='sparse'
+)
 
-    model.save('final_model.h5')
-    
-    return history
+# Step 2: Load the Pre-Trained Model
+base_model = tf.keras.applications.MobileNetV2(weights='imagenet', include_top=False, input_shape=(224, 224, 3))
 
-if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Train the Snazzy Closet model on a dataset.")
-    parser.add_argument("train_dir", type=str, help="Path to the training data directory.")
-    parser.add_argument("val_dir", type=str, help="Path to the validation data directory.")
-    parser.add_argument("--epochs", type=int, default=10, help="Number of epochs to train for.")
-    parser.add_argument("--batch_size", type=int, default=32, help="Batch size for training.")
-    
-    args = parser.parse_args()
-    
-    model = build_model(num_classes=5)  # Replace with your actual number of classes
-    train_model(model, args.train_dir, args.val_dir, epochs=args.epochs, batch_size=args.batch_size)
+# Step 3: Replace the Top Layer with a New Classifier for 6 Categories
+model = tf.keras.Sequential([
+    base_model,
+    tf.keras.layers.GlobalAveragePooling2D(),
+    tf.keras.layers.Dense(6, activation='softmax')  # 6 categories: shirt, pants, hat, shoes, belt, socks
+])
+
+# Step 4: Compile the Model
+model.compile(optimizer=tf.keras.optimizers.Adam(learning_rate=0.0001),
+              loss='sparse_categorical_crossentropy',
+              metrics=['accuracy'])
+
+# Step 5: Fine-Tune the Model
+model.fit(
+    train_generator,
+    validation_data=validation_generator,
+    epochs=10
+)
+
+# Step 6: Save the Fine-Tuned Model
+model.save('fine_tuned_wardrobe_model.h5')

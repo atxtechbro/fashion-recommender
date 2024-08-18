@@ -20,15 +20,23 @@ collection = db['clothing_items']
 # Load the classification model
 model = load_model()
 
-# Function to classify an item
 def classify_item(image_path, model):
     image_array = preprocess_image(image_path)
     predictions = model.predict(image_array[np.newaxis, ...])  # Add batch dimension
-    decoded_predictions = tf.keras.applications.mobilenet_v2.decode_predictions(predictions, top=1)
     
-    # Extract the category from predictions
-    item_category = decoded_predictions[0][0][1]
-    return item_category
+    # Define your custom categories including the new ones
+    wardrobe_categories = ['shirt', 'pants', 'hat', 'shoes', 'belt', 'socks']
+    
+    # Get the index of the highest predicted probability
+    predicted_index = np.argmax(predictions, axis=1)[0]
+    
+    # Map the index to the corresponding category
+    if predicted_index < len(wardrobe_categories):
+        predicted_category = wardrobe_categories[predicted_index]
+    else:
+        predicted_category = "unknown"
+    
+    return predicted_category
 
 # Function to detect the dominant color using KMeans clustering
 def detect_color(image_path):
@@ -146,6 +154,7 @@ def process_and_insert_images(photos_dir, model, collection):
         save_preprocessed_image(preprocessed_image, preprocessed_image_path)
 
     print("All images have been processed and inserted into the database.")
+
 
 if __name__ == "__main__":
     photos_dir = 'reference_assets/test_images/'
