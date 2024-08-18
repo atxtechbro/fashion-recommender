@@ -20,53 +20,74 @@ Snazzy Closet is a fashion recommender app that helps users manage their wardrob
 ## Project Overview
 
 Snazzy Closet aims to provide a seamless and personalized fashion recommendation experience. Users can upload information about their wardrobe, and the system will suggest outfits based on their preferences, previous selections, and other criteria.
-
 ## Project Structure
-Here's an example of toy data that you can use for the `## Project Structure` section:
-
-## Project Structure
-
+```
 ```
 .
 ├── snazzy-closet
+│   ├── public
+│   │   ├── logo512.png
+│   │   ├── index.html
+│   │   ├── logo192.png
+│   │   ├── favicon.ico
+│   │   ├── robots.txt
+│   │   └── manifest.json
+│   ├── package-lock.json
 │   ├── backend
+│   │   ├── tests
+│   │   │   ├── test_user_crud.py
+│   │   │   ├── conftest.py
+│   │   │   └── test_clothing_item_crud.py
 │   │   ├── api
-│   │   │   ├── main.py (API entry point)
-│   │   │   ├── user_routes.py (Handles user-related API endpoints)
-│   │   │   └── clothing_item_routes.py (Handles clothing item API endpoints)
-│   │   ├── db
-│   │   │   ├── db_config.py (MongoDB configuration)
-│   │   │   └── models.py (Database models for users and clothing items)
-│   │   ├── ml
-│   │   │   ├── train.py (ML model training scripts)
-│   │   │   ├── model.py (Defines the ML model)
-│   │   │   └── preprocess.py (Data preprocessing utilities)
+│   │   │   ├── user_routes.py
+│   │   │   ├── __init__.py
+│   │   │   ├── main.py
+│   │   │   └── clothing_item_routes.py
 │   │   ├── utils
-│   │   │   ├── helpers.py (Utility functions)
-│   │   │   ├── logger.py (Logging configuration)
-│   │   │   └── config.py (General configuration)
-│   ├── frontend
-│   │   ├── App.js (Main React component)
-│   │   ├── index.js (Entry point for React app)
-│   │   ├── styles
-│   │   │   ├── App.css (App-wide CSS)
-│   │   │   └── index.css (Global styles)
-│   ├── scripts
-│   │   └── update_readme.py (Script for updating README.md)
-│   ├── tests
-│   │   ├── test_api.py (Tests for API endpoints)
-│   │   ├── test_ml.py (Tests for ML model)
-│   │   └── conftest.py (Test fixtures and setup)
-├── README.md (Project documentation)
-├── requirements.txt (Python dependencies)
-├── package.json (Node.js dependencies and scripts)
-└── .github
-    ├── workflows
-    │   └── update-readme.yml (GitHub Action for README updates)
-    └── ISSUE_TEMPLATE
-        └── bug_report.md (Issue template for reporting bugs)
+│   │   │   ├── helpers.py
+│   │   │   ├── __init__.py
+│   │   │   ├── logger.py
+│   │   │   └── config.py
+│   │   ├── ml
+│   │   │   ├── train.py
+│   │   │   ├── model.py
+│   │   │   ├── __init__.py
+│   │   │   └── preprocess.py
+│   │   └── db
+│   │   │   ├── db_config.py
+│   │   │   ├── models.py
+│   │   │   └── __init__.py
+│   ├── README.md
+│   ├── src
+│   │   ├── App.css
+│   │   ├── index.js
+│   │   ├── logo.svg
+│   │   ├── index.css
+│   │   ├── setupTests.js
+│   │   ├── reportWebVitals.js
+│   │   ├── App.js
+│   │   ├── App.test.js
+│   │   └── SplashPage.js
+│   └── package.json
+├── README.md
+├── scripts
+│   └── update_readme.py
+├── .gitignore
+├── .github
+│   ├── labels.yaml
+│   ├── workflows
+│   │   ├── manage-labels.yml
+│   │   └── update-readme.yml
+│   └── ISSUE_TEMPLATE
+│   │   ├── docs_delight.yml
+│   │   ├── feature_fever.yaml
+│   │   ├── product_polish.yml
+│   │   ├── issue_template.md
+│   │   ├── bug_squash.yml
+│   │   └── easy_win.yml
+└── project_structure.txt
 ```
-
+```
 ## Backend
 
 The backend is responsible for handling API requests, interacting with the database, and running machine learning models.
