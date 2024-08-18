@@ -32,5 +32,8 @@ venv/
 # Ignore Dataset directory
 snazzy_closet/backend/ml/dataset/
 
+# Ignore Training Logs
+snazzy_closet/backend/ml/training_logs/
+
 # Ignore VS Code settings (optional)
 .vscode/

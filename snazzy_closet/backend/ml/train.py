@@ -1,5 +1,6 @@
 import datetime
 import json
+import os
 import tensorflow as tf
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
 
@@ -55,13 +56,17 @@ history = model.fit(
 
 timestamp = datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
 
+# Define the log directory
+log_dir = 'snazzy_closet/backend/ml/training_logs'
+os.makedirs(log_dir, exist_ok=True)
+
 # Save the model with the timestamp in the filename
-model.save(f'fine_tuned_wardrobe_model_{timestamp}.h5')
+model.save(os.path.join(log_dir, f'fine_tuned_wardrobe_model_{timestamp}.h5'))
 
 # Save the training history
-history_path = f'training_history_{timestamp}.json'
+history_path = os.path.join(log_dir, f'training_history_{timestamp}.json')
 with open(history_path, 'w') as f:
     json.dump(history.history, f)
 
-print(f"Model saved as fine_tuned_wardrobe_model_{timestamp}.h5")
+print(f"Model saved as fine_tuned_wardrobe_model_{timestamp}.h5 in {log_dir}")
 print(f"Training history saved as {history_path}")
