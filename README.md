@@ -1,6 +1,6 @@
 # Snazzy Closet
 
-Snazzy Closet is a fashion recommender app that helps users manage their wardrobe and receive personalized outfit recommendations. The project leverages FastAPI for the backend, MongoDB for data storage, and React for the frontend. It also includes machine learning components for analyzing user data to improve recommendations.
+Snazzy Closet is a fashion recommender app that helps users manage their wardrobe and receive personalized outfit recommendations. The project leverages FastAPI for the backend, MongoDB for data storage, and React for the frontend. It also includes machine learning components for analyzing user data to improve recommendations
 
 ## Table of Contents
 
