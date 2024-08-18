@@ -6,10 +6,13 @@ from data_loading import load_and_preprocess_fashion_mnist
 from model import build_model
 from config import BATCH_SIZE, LEARNING_RATE, EPOCHS, TRAINING_LOG_DIR, MODEL_INPUT_SHAPE, NUM_CLASSES
 
+logger = get_logger(__name__)
+
 def compile_model(model, learning_rate=LEARNING_RATE):
     model.compile(optimizer=tf.keras.optimizers.Adam(learning_rate=learning_rate),
                   loss='sparse_categorical_crossentropy',
                   metrics=['accuracy'])
+    logger.info("Model compiled with Adam optimizer and sparse_categorical_crossentropy loss")
     return model
 
 def train_model(model, train_dataset, test_dataset, epochs=EPOCHS, checkpoint_dir=None):
@@ -23,13 +26,15 @@ def train_model(model, train_dataset, test_dataset, epochs=EPOCHS, checkpoint_di
             save_freq='epoch'
         )
         callbacks.append(checkpoint_callback)
-    
+        logger.info(f"Checkpointing enabled. Checkpoints will be saved in {checkpoint_dir}")
+
     history = model.fit(
         train_dataset,
         validation_data=test_dataset,
         epochs=epochs,
         callbacks=callbacks
     )
+    logger.info(f"Training completed for {epochs} epochs")
     
     return history
 
@@ -45,25 +50,18 @@ def save_training_artifacts(model, history, log_dir=TRAINING_LOG_DIR):
     with open(history_path, 'w') as f:
         json.dump(history.history, f)
     
-    print(f"Model saved as {model_path}")
-    print(f"Training history saved as {history_path}")
+    logger.info(f"Model saved as {model_path}")
+    logger.info(f"Training history saved as {history_path}")
 
 if __name__ == "__main__":
-    # Load and preprocess the Fashion-MNIST data
     train_dataset, test_dataset = load_and_preprocess_fashion_mnist()
 
-    # Convert to tf.data.Dataset and batch the data
     train_dataset = tf.data.Dataset.from_tensor_slices(train_dataset).batch(BATCH_SIZE)
     test_dataset = tf.data.Dataset.from_tensor_slices(test_dataset).batch(BATCH_SIZE)
 
-    # Build the model
     model = build_model(input_shape=MODEL_INPUT_SHAPE, num_classes=NUM_CLASSES)
-    
-    # Compile the model
     model = compile_model(model)
 
-    # Train the model with checkpointing
     history = train_model(model, train_dataset, test_dataset, checkpoint_dir=os.path.join(TRAINING_LOG_DIR, 'checkpoints'))
     
-    # Save the model and training history
     save_training_artifacts(model, history)
