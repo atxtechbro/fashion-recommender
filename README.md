@@ -21,9 +21,6 @@ Snazzy Closet is a fashion recommender app that helps users manage their wardrob
 
 Snazzy Closet aims to provide a seamless and personalized fashion recommendation experience. Users can upload information about their wardrobe, and the system will suggest outfits based on their preferences, previous selections, and other criteria.
 
-## Project Structure
-
-```
 <!-- AUTOMATED GHA OUTPUT FOR TREE SHOULD GO HERE AND REPLACE THIS PART AND LOOK PRETTY -->
 ```
 
