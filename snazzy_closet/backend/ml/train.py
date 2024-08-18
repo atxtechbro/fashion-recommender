@@ -5,8 +5,15 @@ import tensorflow as tf
 from preprocess import load_and_preprocess_fashion_mnist
 from model import build_model
 
+# Set a smaller batch size
+BATCH_SIZE = 16  # You can try lowering this even further if needed
+
 # Load and preprocess the Fashion-MNIST data
 train_dataset, test_dataset = load_and_preprocess_fashion_mnist()
+
+# Convert to tf.data.Dataset and batch the data
+train_dataset = tf.data.Dataset.from_tensor_slices(train_dataset).batch(BATCH_SIZE)
+test_dataset = tf.data.Dataset.from_tensor_slices(test_dataset).batch(BATCH_SIZE)
 
 # Build the model
 model = build_model(input_shape=(224, 224, 3), num_classes=10)
