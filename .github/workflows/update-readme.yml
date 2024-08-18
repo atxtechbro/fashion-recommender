@@ -29,10 +29,24 @@ jobs:
       
       - name: Update README
         run: |
+          # Make a backup of the original README.md
+          cp README.md README.md.bak
+          # Replace the project structure section in README.md
           sed -i '/## Project Structure/{n;d;}' README.md
           sed -i "/## Project Structure/r project_structure.txt" README.md
 
+      - name: Check for changes
+        run: |
+          # Check if there are differences between the new and original README.md
+          if git diff --quiet README.md; then
+            echo "No changes detected, exiting..."
+            echo "changes=false" >> $GITHUB_ENV
+          else
+            echo "Changes detected."
+            echo "changes=true" >> $GITHUB_ENV
+
       - name: Commit changes
+        if: env.changes == 'true' # Only run if changes are detected
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email '41898282+github-actions[bot]@users.noreply.github.com'
@@ -41,3 +55,8 @@ jobs:
           git push
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Cleanup
+        run: |
+          # Clean up the backup file
+          rm README.md.bak
