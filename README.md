@@ -22,51 +22,6 @@ Snazzy Closet is a fashion recommender app that helps users manage their wardrob
 Snazzy Closet aims to provide a seamless and personalized fashion recommendation experience. Users can upload information about their wardrobe, and the system will suggest outfits based on their preferences, previous selections, and other criteria.
 ## Project Structure
 
-Here's an example of toy data that you can use for the `## Project Structure` section:
-
-```markdown
-## Project Structure
-
-```
-.
-├── snazzy-closet
-│   ├── backend
-│   │   ├── api
-│   │   │   ├── main.py (API entry point)
-│   │   │   ├── user_routes.py (Handles user-related API endpoints)
-│   │   │   └── clothing_item_routes.py (Handles clothing item API endpoints)
-│   │   ├── db
-│   │   │   ├── db_config.py (MongoDB configuration)
-│   │   │   └── models.py (Database models for users and clothing items)
-│   │   ├── ml
-│   │   │   ├── train.py (ML model training scripts)
-│   │   │   ├── model.py (Defines the ML model)
-│   │   │   └── preprocess.py (Data preprocessing utilities)
-│   │   ├── utils
-│   │   │   ├── helpers.py (Utility functions)
-│   │   │   ├── logger.py (Logging configuration)
-│   │   │   └── config.py (General configuration)
-│   ├── frontend
-│   │   ├── App.js (Main React component)
-│   │   ├── index.js (Entry point for React app)
-│   │   ├── styles
-│   │   │   ├── App.css (App-wide CSS)
-│   │   │   └── index.css (Global styles)
-│   ├── scripts
-│   │   └── update_readme.py (Script for updating README.md)
-│   ├── tests
-│   │   ├── test_api.py (Tests for API endpoints)
-│   │   ├── test_ml.py (Tests for ML model)
-│   │   └── conftest.py (Test fixtures and setup)
-├── README.md (Project documentation)
-├── requirements.txt (Python dependencies)
-├── package.json (Node.js dependencies and scripts)
-└── .github
-    ├── workflows
-    │   └── update-readme.yml (GitHub Action for README updates)
-    └── ISSUE_TEMPLATE
-        └── bug_report.md (Issue template for reporting bugs)
-```
 
 ## Backend
 
