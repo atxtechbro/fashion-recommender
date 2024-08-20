@@ -5,6 +5,7 @@ snazzy_closet/node_modules
 snazzy_closet/build
 
 # Environment Variables
+.env
 .env.local
 .env.development.local
 .env.test.local
