@@ -1,5 +1,5 @@
 from pymongo import MongoClient
-from ml.config import (
+from snazzy_closet.backend.ml.config import (
     MONGODB_URI,
     DATABASE_NAME,
     COLLECTION_NAME,
